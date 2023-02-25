@@ -1,0 +1,134 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from USSDAdapterServiceImplService WSDL service -->
+
+  <service name="USSDAdapterService" provider="java:RPC" style="rpc" use="encoded">
+      <parameter name="wsdlTargetNamespace" value="http://211.137.182.5/tmportal/services/USSDAdapterService"/>
+      <parameter name="wsdlServiceElement" value="USSDAdapterServiceImplService"/>
+      <parameter name="schemaUnqualified" value="urn:bo.webservice.inspur.com,http://211.137.182.5/tmportal/services/USSDAdapterService,http://xml.apache.org/xml-soap"/>
+      <parameter name="wsdlServicePort" value="USSDAdapterService"/>
+      <parameter name="className" value="_5._182._137._211.tmportal.services.USSDAdapterService.USSDAdapterServiceSoapBindingImpl"/>
+      <parameter name="wsdlPortType" value="USSDAdapterServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation name="example" qname="operNS:example" xmlns:operNS="http://webservice.inspur.com" returnQName="exampleReturn" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="message" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="makeUssd" qname="operNS:makeUssd" xmlns:operNS="http://webservice.inspur.com" returnQName="makeUssdReturn" returnType="rtns:MakeUssdResponse" xmlns:rtns="urn:bo.webservice.inspur.com" soapAction="" >
+        <parameter qname="parameter" type="tns:MakeUssdRequest" xmlns:tns="urn:bo.webservice.inspur.com"/>
+      </operation>
+      <operation name="handleUssd" qname="operNS:handleUssd" xmlns:operNS="http://webservice.inspur.com" returnQName="handleUssdReturn" returnType="rtns:HandleUssdResponse" xmlns:rtns="urn:bo.webservice.inspur.com" soapAction="" >
+        <parameter qname="parameter" type="tns:HandleUssdRequest" xmlns:tns="urn:bo.webservice.inspur.com"/>
+      </operation>
+      <operation name="ussdContinue" qname="operNS:ussdContinue" xmlns:operNS="http://webservice.inspur.com" returnQName="ussdContinueReturn" returnType="rtns:UssdContinueResponse" xmlns:rtns="urn:bo.webservice.inspur.com" soapAction="" >
+        <parameter qname="parameter" type="tns:UssdContinueRequest" xmlns:tns="urn:bo.webservice.inspur.com"/>
+      </operation>
+      <operation name="notifyUssdEnd" qname="operNS:notifyUssdEnd" xmlns:operNS="http://webservice.inspur.com" soapAction="" >
+        <parameter qname="parameter" type="tns:NotifyUssdEndRequest" xmlns:tns="urn:bo.webservice.inspur.com"/>
+      </operation>
+      <operation name="endUssd" qname="operNS:endUssd" xmlns:operNS="http://webservice.inspur.com" soapAction="" >
+        <parameter qname="req" type="tns:EndUssdRequest" xmlns:tns="urn:bo.webservice.inspur.com"/>
+        <parameter qname="flag" type="tns:int" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+      </operation>
+      <operation name="getUssdMenuByList" qname="operNS:getUssdMenuByList" xmlns:operNS="http://webservice.inspur.com" returnQName="getUssdMenuByListReturn" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="list" type="tns:ArrayOf_xsd_anyType" xmlns:tns="http://211.137.182.5/tmportal/services/USSDAdapterService"/>
+      </operation>
+      <operation name="getUssdMenuByContinueCommand" qname="operNS:getUssdMenuByContinueCommand" xmlns:operNS="http://webservice.inspur.com" returnQName="getUssdMenuByContinueCommandReturn" returnType="rtns:string" xmlns:rtns="http://www.w3.org/2001/XMLSchema" soapAction="" >
+        <parameter qname="identifier" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="mobile" type="tns:string" xmlns:tns="http://www.w3.org/2001/XMLSchema"/>
+        <parameter qname="arg" type="tns:ArrayOf_xsd_string" xmlns:tns="http://211.137.182.5/tmportal/services/USSDAdapterService"/>
+      </operation>
+      <operation name="main" qname="operNS:main" xmlns:operNS="http://webservice.inspur.com" soapAction="" >
+        <parameter qname="arg" type="tns:ArrayOf_xsd_string" xmlns:tns="http://211.137.182.5/tmportal/services/USSDAdapterService"/>
+      </operation>
+      <parameter name="allowedMethods" value="makeUssd main example getUssdMenuByList getUssdMenuByContinueCommand handleUssd endUssd ussdContinue notifyUssdEnd"/>
+
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:MakeUssdResponse"
+        type="java:com.inspur.webservice.bo.MakeUssdResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://211.137.182.5/tmportal/services/USSDAdapterService"
+        qname="ns:ArrayOf_xsd_string"
+        type="java:java.lang.String[]"
+        innerType="cmp-ns:string" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:NotifyUssdEndRequest"
+        type="java:com.inspur.webservice.bo.NotifyUssdEndRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:HandleUssdResponse"
+        type="java:com.inspur.webservice.bo.HandleUssdResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:HandleUssdRequest"
+        type="java:com.inspur.webservice.bo.HandleUssdRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:UssdContinueResponse"
+        type="java:com.inspur.webservice.bo.UssdContinueResponse"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:UssdContinueRequest"
+        type="java:com.inspur.webservice.bo.UssdContinueRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:EndUssdRequest"
+        type="java:com.inspur.webservice.bo.EndUssdRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <arrayMapping
+        xmlns:ns="http://211.137.182.5/tmportal/services/USSDAdapterService"
+        qname="ns:ArrayOf_xsd_anyType"
+        type="java:java.lang.Object[]"
+        innerType="cmp-ns:anyType" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+      <typeMapping
+        xmlns:ns="urn:bo.webservice.inspur.com"
+        qname="ns:MakeUssdRequest"
+        type="java:com.inspur.webservice.bo.MakeUssdRequest"
+        serializer="org.apache.axis.encoding.ser.BeanSerializerFactory"
+        deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory"
+        encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"
+      />
+  </service>
+</deployment>

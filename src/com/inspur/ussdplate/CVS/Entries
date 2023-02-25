@@ -1,0 +1,15 @@
+/BossClassConfig.java/1.1.1.1/Fri Sep 11 03:53:10 2009//
+/SocketManager.java/1.1.1.1/Fri Sep 11 03:53:10 2009//
+/SystemPara.java/1.1.1.1/Fri Sep 11 03:53:10 2009//
+/USSD.java/1.3/Thu Aug 19 01:30:42 2010//
+/USSDInterface.java/1.1.1.1/Fri Sep 11 03:53:10 2009//
+/USSDMonitorThread.java/1.2/Thu Aug 19 01:30:42 2010//
+/UssdHead.java/1.1.1.1/Fri Sep 11 03:53:10 2009//
+D/control////
+D/db////
+D/message////
+D/queue////
+D/rcv////
+D/snd////
+D/ussdpara////
+D/util////
